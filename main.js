@@ -5,7 +5,7 @@ const fs = require('fs/promises');
     let donaldTrumpElonSmut;
 
     try {
-        donaldTrumpElonSmut = await fs.readFile('./federal-registry/smut.txt', 'utf8');
+        donaldTrumpElonSmut = await fs.readFile('textInput.txt', 'utf8');
     } catch (err) {
         console.error("Error reading smut.txt:", err);
         return;
@@ -61,7 +61,7 @@ const fs = require('fs/promises');
         await randomDelay(300, 700);
 
         if (count % 2 !== 0) {
-            await page.screenshot({ path: `./federal-registry/screenshits/OnloadV2-${count}.jpg` });
+            await page.screenshot({ path: `/screenshits/OnloadV2-${count}.jpg` });
         }
 
         await page.waitForSelector('#comment_comment', { visible: true });
@@ -82,7 +82,7 @@ const fs = require('fs/promises');
         await randomDelay(100, 700);
 
         if (count % 2 !== 0) {
-            await page.screenshot({ path: `./federal-registry/screenshits/BeforeClickingV2-${count}.jpg` });
+            await page.screenshot({ path: `/screenshits/BeforeClickingV2-${count}.jpg` });
         }
 
         await page.waitForSelector('#comment_submit_action', { visible: true });
@@ -92,7 +92,7 @@ const fs = require('fs/promises');
         await delayGen();
 
         if (count % 2 !== 0) {
-            await page.screenshot({ path: `./federal-registry/screenshits/AfterClickingV2-${count}.jpg` });
+            await page.screenshot({ path: `/screenshits/AfterClickingV2-${count}.jpg` });
         }
 
         const titleBarExists = await page.$('h3.title_bar') !== null;
@@ -101,9 +101,9 @@ const fs = require('fs/promises');
             failureAttempts++ // Increase Count for this variable
             console.log(`${count} - Attempt Failure, Error Below`) // Debug logs
             console.log("h3.title_bar found. Pausing for 10 seconds and closing browser."); // Debug logs
-            await page.screenshot({ path: `./federal-registry/screenshits/TitleBarNotFoundV2-${count}-Failure:${failureAttempts}.jpg` }); // Take a screenshot
+            await page.screenshot({ path: `/screenshits/TitleBarNotFoundV2-${count}-Failure:${failureAttempts}.jpg` }); // Take a screenshot
             const pageContents = await page.content(); // Get Page code and save it 
-            fs.writeFile('./federal-registry/fuckedContents.html', pageContents, (error) => {
+            fs.writeFile('/fuckedContents.html', pageContents, (error) => {
                 if (error) throw error;
                 console.log(error);
             });

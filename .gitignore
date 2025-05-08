@@ -1,3 +1,3 @@
-screenshits
-node_modules
+/screenshots/
+/node_modules/
 fuckedContents.html
